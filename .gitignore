@@ -106,3 +106,8 @@ dist
 # My Files
 envsUrls.js
 usersData.js
+
+# My Folders
+allure-report/
+allure-results/
+videos/
