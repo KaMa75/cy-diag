@@ -16,9 +16,6 @@ class LoginPage {
         this.emailInput.type(login);
         this.passwordInput.type(password);
         this.loginButton.click();
-        // this.emailInput.type();
-        // this.passwordInput.type();
-        // cy.contains('button', 'Zaloguj').click();
     }
     
 }

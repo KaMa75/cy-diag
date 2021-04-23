@@ -31,3 +31,7 @@ Cypress.Commands.add('logInToAdminApp', (user) => {
     cy.visit(envUrls.devAdmin);
     logInPage.logIn(user);
 });
+
+Cypress.Commands.add('getHeadbar', () => {
+    return cy.get('main .MuiGrid-root div').first();
+});
