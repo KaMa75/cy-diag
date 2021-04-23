@@ -23,3 +23,11 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import envUrls from '../data/envsUrls';
+import { logInPage } from '../integration/page-objects/loginPage.po';
+
+Cypress.Commands.add('logInToAdminApp', (user) => {
+    cy.visit(envUrls.devAdmin);
+    logInPage.logIn(user);
+});
