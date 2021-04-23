@@ -4,12 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "cy:run": "cypress run --env allure=true",
+    "allure:report": "allure generate allure-results --clean -o allure-report",
+    "allure:clear": "if exist allure-results rmdir /q /s allure-results && if exist allure-report rmdir /q /s allure-report && if exist cypress\screenshots rmdir /q /s cypress\screenshots && if exist cypress\videos rmdir /q /s cypress\videos",
+    "pretest": "npm run allure:clear",
+    "test": "npm run cy:run || npm run posttest",
+    "posttest": "npm run allure:report"
   },
   "author": "KM",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^7.1.0"
+  },
+  "dependencies": {
+    "@shelex/cypress-allure-plugin": "^2.5.0",
+    "allure-commandline": "^2.13.8"
   }
 }
