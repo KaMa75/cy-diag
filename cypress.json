@@ -1,5 +1,14 @@
 {
-    "ignoreTestFiles": "**/page-objects/*",
+    "ignoreTestFiles": ["**/page-objects/*",
+                        "**/__snapshots__/*",
+                        "**/__image_snapshots__/*"],
     "viewportWidth": 1920,
-    "viewportHeight": 1080
+    "viewportHeight": 1080,
+    "env": {
+        "cypress-plugin-snapshots": {
+            "imageConfig": {
+                "treshold": 0.01
+            }
+        }
+    }
 }
