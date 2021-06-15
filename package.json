@@ -15,7 +15,8 @@
   "author": "KM",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^7.1.0"
+    "cypress": "^7.5.0",
+    "cypress-image-snapshot": "^4.0.1"
   },
   "dependencies": {
     "@shelex/cypress-allure-plugin": "^2.5.0",

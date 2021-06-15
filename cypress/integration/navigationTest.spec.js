@@ -30,4 +30,8 @@ describe('Test navigation buttons', () => {
         headBar.header.should('have.text', headbarHeaders.clients);
     });
 
+    after('Log out', () => {
+        cy.logOut();
+    });
+
 });

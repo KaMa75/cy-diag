@@ -12,10 +12,22 @@ class LoginPage {
         return cy.contains('button', 'Zaloguj');
     }
 
+    get forgotPasswordButton () {
+        return cy.contains('button', 'zapomniałeś HASŁA?');
+    }
+
     logIn({login, password}) {
         this.emailInput.type(login);
         this.passwordInput.type(password);
         this.loginButton.click();
+    }
+
+    clickLoginButton() {
+        return this.loginButton.click();
+    }
+
+    clickForgotPasswordButton() {
+        return this.forgotPasswordButton.click();
     }
     
 }

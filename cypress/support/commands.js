@@ -24,6 +24,10 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
+addMatchImageSnapshotCommand();
+
+
 import envUrls from '../data/envsUrls';
 import { logInPage } from '../integration/page-objects/loginPage.po';
 
@@ -34,6 +38,10 @@ Cypress.Commands.add('goToAdminAppLoginPage', () => {
 Cypress.Commands.add('logInToAdminApp', (user) => {
     cy.goToAdminAppLoginPage();
     logInPage.logIn(user);
+});
+
+Cypress.Commands.add('logOut', () => {
+    cy.contains('Wyloguj').click();
 });
 
 Cypress.Commands.add('getHeadbar', () => {

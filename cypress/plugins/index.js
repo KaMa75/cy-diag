@@ -22,11 +22,13 @@
   // `config` is the resolved Cypress config
 //}
 
-const { initPlugin } = require('cypress-plugin-snapshots/plugin');
+// const { initPlugin } = require('cypress-plugin-snapshots/plugin');
+const { addMatchImageSnapshotPlugin } = require('cypress-image-snapshot/plugin');
 const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 
 module.exports = (on, config) => {
-    initPlugin(on, config);
+    // initPlugin(on, config);
+    addMatchImageSnapshotPlugin(on, config);
     allureWriter(on, config);
     return config;
 };
