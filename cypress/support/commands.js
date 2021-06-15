@@ -27,8 +27,13 @@
 import envUrls from '../data/envsUrls';
 import { logInPage } from '../integration/page-objects/loginPage.po';
 
-Cypress.Commands.add('logInToAdminApp', (user) => {
+Cypress.Commands.add('goToAdminAppLoginPage', () => {
     cy.visit(envUrls.devAdmin);
+});
+
+Cypress.Commands.add('logInToAdminApp', (user) => {
+    // cy.visit(envUrls.devAdmin);
+    cy.goToAdminAppLoginPage();
     logInPage.logIn(user);
 });
 
