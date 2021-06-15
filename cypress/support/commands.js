@@ -32,7 +32,6 @@ Cypress.Commands.add('goToAdminAppLoginPage', () => {
 });
 
 Cypress.Commands.add('logInToAdminApp', (user) => {
-    // cy.visit(envUrls.devAdmin);
     cy.goToAdminAppLoginPage();
     logInPage.logIn(user);
 });
