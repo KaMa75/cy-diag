@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
-import { logInPage } from '../integration/page-objects/loginPage.po';
-import { recoverPass } from '../integration/page-objects/recoverPassword.po';
+import { logInPage } from '../page-objects/loginPage.po';
+import { recoverPass } from '../page-objects/recoverPassword.po';
 
-
+/*
 describe('Visual test login pages', () => {
 
     it('Test login page', () => {
@@ -36,3 +36,4 @@ describe('Visual test login pages', () => {
     });
 
 });
+*/

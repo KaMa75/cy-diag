@@ -1,12 +1,13 @@
 /// <reference types="cypress" />
 
-import users from '../data/usersData';
-import headbarHeaders from '../data/headbarHeaders';
-import colors from '../data/colors';
-import { navigationBar } from './page-objects/navigationBar.po';
-import { headBar } from './page-objects/headBar.po';
+import users from '../../../data/usersData';
+import headbarHeaders from '../../../data/headbarHeaders';
+import colors from '../../../data/colors';
 
-describe('Test navigation buttons', () => {
+import { navigationBar } from '../../page-objects/navigationBar.po';
+import { headBar } from '../../page-objects/headBar.po';
+
+describe('Test navigation buttons - Facility Coordinator', () => {
 
     before('Log In to app', () => {
         cy.logInToAdminApp(users.facCoordinator);

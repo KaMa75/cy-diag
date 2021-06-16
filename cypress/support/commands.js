@@ -38,12 +38,10 @@ Cypress.Commands.add('goToAdminAppLoginPage', () => {
 Cypress.Commands.add('logInToAdminApp', (user) => {
     cy.goToAdminAppLoginPage();
     logInPage.logIn(user);
+    cy.wait(1000);
 });
 
 Cypress.Commands.add('logOut', () => {
     cy.contains('Wyloguj').click();
 });
 
-Cypress.Commands.add('getHeadbar', () => {
-    return cy.get('main .MuiGrid-root div').first();
-});
