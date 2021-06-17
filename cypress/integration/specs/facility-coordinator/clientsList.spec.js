@@ -10,10 +10,10 @@ import { clientsList } from '../../page-objects/clientsList.po';
 import { headBar } from '../../page-objects/headBar.po';
 import { pagination } from '../../page-objects/pagination.po';
 
-let currentUrl = '';
+let userId;
 
-describe('Test clients list header - Facility Coordinator', () => {
-
+describe('Test clients list - Facility Coordinator', () => {
+    
     before('Log In to app', () => {
         cy.logInToAdminApp(users.facCoordinator);
         headBar.header.then(($header) => {
@@ -21,19 +21,30 @@ describe('Test clients list header - Facility Coordinator', () => {
                 navigationBar.goToClients();
             }
         })
+
+        cy.getLocalStorage('diagmaticCurrentUserId').then(txt => {
+            userId = txt;
+        });
+    });
+    
+    beforeEach('Read localstorage', () => {
+        cy.restoreLocalStorage();
     });
 
 
+    afterEach('Save localstorage', () => {
+        cy.saveLocalStorage();
+    });
+
     it(`Should be ${cardsHeaders.clientsList} header`, () => {
         clientsList.cardHeader.should('have.text', cardsHeaders.clientsList);
-        cy.url().then((url) => {
-            currentUrl = url;
-        })
     });
 
     
     it('Should be default pagination value after login - 10 rows', () => {
-        cy.visit(currentUrl);
+        cy.getLocalStorage('diagmaticCurrentUserId').then(txt => {
+            console.log(txt)
+        });
         pagination.rowsInput.should('have.value', '10');
     });
 
@@ -53,10 +64,11 @@ describe('Test clients list header - Facility Coordinator', () => {
     });
 
     it('Should be disabled next buttons at last page', () => {
+        cy.logInToAdminApp(users.facCoordinator);
 
         pagination.pagCaption.then(($caption) => {
             const { lastElement, allElements } = pagination.getPagCaptionInfo($caption);
-
+            
             if(lastElement !== allElements) {
                 pagination.goToLastPage();
             }            
@@ -76,11 +88,5 @@ describe('Test clients list header - Facility Coordinator', () => {
         });
 
     });
-
-
-
-    // after('Log out', () => {
-    //     cy.logOut();
-    // });
 
 });
