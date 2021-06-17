@@ -44,4 +44,3 @@ Cypress.Commands.add('logInToAdminApp', (user) => {
 Cypress.Commands.add('logOut', () => {
     cy.contains('Wyloguj').click();
 });
-
