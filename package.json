@@ -16,7 +16,8 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^7.5.0",
-    "cypress-image-snapshot": "^4.0.1"
+    "cypress-image-snapshot": "^4.0.1",
+    "cypress-localstorage-commands": "^1.4.5"
   },
   "dependencies": {
     "@shelex/cypress-allure-plugin": "^2.5.0",
