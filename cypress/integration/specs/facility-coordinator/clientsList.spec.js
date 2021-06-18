@@ -45,10 +45,24 @@ describe('Test clients list view - Facility Coordinator', () => {
         });
     });
 
-    // it.only('Should be default sorted descending by the last survey, sorted column have green header', () => {
-    //     clientsList.tableHeaderCols.contains(clientsListCard.defaultSortedColumn).should('have.css', 'color', colors.sortedColumn);
-    //     console.log(clientsList.surveysDates);
-    // });
+    it.only('Should be default sorted descending by the last survey, sorted column have green header', () => {
+        clientsList.tableHeaderCols.contains(clientsListCard.defaultSortedColumn).should('have.css', 'color', colors.sortedColumn);
+
+        clientsList.surveysDates.then(($dates) => {
+
+            const dates = [];
+
+            cy.wrap($dates).each(($date, index) => {
+                console.log($date.text().split(/\/|, |:/));
+                https://developer.mozilla.org/pl/docs/Web/JavaScript/Reference/Global_Objects/Date
+                dates[index] = $date.text();                
+            }).then(() => {
+                console.log(dates)
+            });
+
+        });
+
+    });
 
 })
 

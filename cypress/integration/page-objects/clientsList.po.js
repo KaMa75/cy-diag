@@ -16,16 +16,16 @@ export class ClientsList {
         return this.card.find('tbody').find('tr');
     }
 
+    get clients() {
+        return this.card.find('tbody').find('tr > td:nth-child(2)');
+    }
+
     get surveysDates() {
-        const dates = []
-        this.tableRows.each(($tableRow, index) => {
-            cy.wrap($tableRow).find('td').eq(1).then(($value) => {
-                dates[index] = $value.text();
-            });
-        }).then(() => {
-            console.log(dates)
-            return dates;
-        });
+        return this.card.find('tbody').find('tr > td:nth-child(2)');
+    }
+
+    get status() {
+        return this.card.find('tbody').find('tr > td:nth-child(2)');
     }
 
 }
