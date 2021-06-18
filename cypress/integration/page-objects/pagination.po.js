@@ -28,8 +28,16 @@ export class Pagination {
         return this.pagination.find('button');
     }
 
+    get options() {
+        return cy.get('.MuiPopover-root li');
+    }
+
     getPagCaptionInfo(caption) {
         return getPagCaptionInfo(caption.text());
+    }
+
+    goToOptionsList() {
+        return this.rowsSelect.click();
     }
 
     goToFirstPage() {
