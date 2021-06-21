@@ -45,7 +45,7 @@ describe('Test clients list view - Facility Coordinator', () => {
         });
     });
 
-    it.only('Should be default sorted descending by the last survey, sorted column have green header', () => {
+    it('Should be default sorted descending by the last survey, sorted column have green header', () => {
         clientsList.tableHeaderCols.contains(clientsListCard.defaultSortedColumn).should('have.css', 'color', colors.sortedColumn);
 
         clientsList.surveysDates.then(($dates) => {
@@ -62,6 +62,33 @@ describe('Test clients list view - Facility Coordinator', () => {
                 const sortedDates = dates.sort((a, b) => b - a);
                 const isSorted = dates.every((date, index) => date === sortedDates[index]);
                 expect(isSorted, 'List is sorted descending by survey date').to.be.true;
+            });
+
+        });
+
+    });
+
+    it.only('Should be sorted ascending by the last survey, sorted column have green header', () => {
+
+        logInAndGoToClients();
+        clientsList.tableHeaderCols.contains(clientsListCard.tableHeaders[1]).click();
+        cy.wait(1000);
+        clientsList.tableHeaderCols.contains(clientsListCard.defaultSortedColumn).should('have.css', 'color', colors.sortedColumn);
+
+        clientsList.surveysDates.then(($dates) => {
+
+            const dates = [];
+
+            cy.wrap($dates).each(($date, index) => {
+                if($date.text()) {
+                    dates[index] = cy.parseDate($date.text());
+                } else {
+                    dates[index] = 0;
+                }
+            }).then(() => {
+                const sortedDates = dates.sort((a, b) => a - b);
+                const isSorted = dates.every((date, index) => date === sortedDates[index]);
+                expect(isSorted, 'List is sorted ascending by survey date').to.be.true;
             });
 
         });
