@@ -25,7 +25,7 @@ export class ClientsList {
     }
 
     get status() {
-        return this.card.find('tbody').find('tr > td:nth-child(2)');
+        return this.card.find('tbody').find('tr > td:nth-child(3)');
     }
 
 }

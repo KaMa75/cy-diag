@@ -99,7 +99,7 @@ describe('Test clients list view - Facility Coordinator', () => {
 
     });
 
-    it.only('Should be sorted by the clients, sorted column have green header', () => {
+    it('Should be sorted by the clients, sorted column have green header', () => {
 
         logInAndGoToClients();
         clientsList.tableHeaderCols.contains(clientsListCard.tableHeaders[0]).click().should('have.css', 'color', colors.sortedColumn);
@@ -132,6 +132,45 @@ describe('Test clients list view - Facility Coordinator', () => {
                 const sortedClients = sortArrayTextDesc(clients);
                 const isSorted = clients.every((clients, index) => clients === sortedClients[index]);
                 expect(isSorted, 'List is sorted descending by clients').to.be.true;
+            });
+
+        });
+
+    });
+
+    it.only('Should be sorted by the status, sorted column have green header', () => {
+
+        logInAndGoToClients();
+        clientsList.tableHeaderCols.contains(clientsListCard.tableHeaders[2]).click().should('have.css', 'color', colors.sortedColumn);
+        cy.wait(1000);
+
+        clientsList.status.then(($status) => {
+
+            const status = [];
+
+            cy.wrap($status).each(($status, index) => {
+                status[index] = $status.text();
+            }).then(() => {
+                const sortedStatus = sortArrayTextAsc(status);
+                const isSorted = status.every((status, index) => status === sortedStatus[index]);
+                expect(isSorted, 'List is sorted ascending by status').to.be.true;
+            });
+
+        });
+
+        clientsList.tableHeaderCols.contains(clientsListCard.tableHeaders[2]).click().should('have.css', 'color', colors.sortedColumn);
+        cy.wait(1000);
+
+        clientsList.status.then(($status) => {
+
+            const status = [];
+
+            cy.wrap($status).each(($status, index) => {
+                status[index] = $status.text();
+            }).then(() => {
+                const sortedStatus = sortArrayTextDesc(status);
+                const isSorted = status.every((status, index) => status === sortedStatus[index]);
+                expect(isSorted, 'List is sorted descending by status').to.be.true;
             });
 
         });
