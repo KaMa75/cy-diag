@@ -17,7 +17,7 @@ export class ClientsList {
     }
 
     get clients() {
-        return this.card.find('tbody').find('tr > td:nth-child(2)');
+        return this.card.find('tbody').find('tr > td:nth-child(1)');
     }
 
     get surveysDates() {

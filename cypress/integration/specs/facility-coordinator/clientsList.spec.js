@@ -7,6 +7,7 @@ import clientsListCard from '../../../data/clientsListCard';
 import paginationOptionsList from '../../../data/pagOptionsList';
 
 import parseDate from '../../../utils/parseDate';
+import { sortArrayTextAsc, sortArrayTextDesc } from '../../../utils/sortArrayText';
 
 import { navigationBar } from '../../page-objects/navigationBar.po';
 import { clientsList } from '../../page-objects/clientsList.po';
@@ -47,7 +48,7 @@ describe('Test clients list view - Facility Coordinator', () => {
         });
     });
 
-    it.only('Should be default sorted descending by the last survey, sorted column have green header', () => {
+    it('Should be default sorted descending by the last survey, sorted column have green header', () => {
         clientsList.tableHeaderCols.contains(clientsListCard.defaultSortedColumn).should('have.css', 'color', colors.sortedColumn);
 
         clientsList.surveysDates.then(($dates) => {
@@ -71,7 +72,7 @@ describe('Test clients list view - Facility Coordinator', () => {
 
     });
 
-    it.only('Should be sorted ascending by the last survey, sorted column have green header', () => {
+    it('Should be sorted ascending by the last survey, sorted column have green header', () => {
 
         logInAndGoToClients();
         clientsList.tableHeaderCols.contains(clientsListCard.tableHeaders[1]).click().should('have.css', 'color', colors.sortedColumn);
@@ -98,7 +99,44 @@ describe('Test clients list view - Facility Coordinator', () => {
 
     });
 
-    
+    it.only('Should be sorted by the clients, sorted column have green header', () => {
+
+        logInAndGoToClients();
+        clientsList.tableHeaderCols.contains(clientsListCard.tableHeaders[0]).click().should('have.css', 'color', colors.sortedColumn);
+        cy.wait(1000);
+
+        clientsList.clients.then(($clients) => {
+
+            const clients = [];
+
+            cy.wrap($clients).each(($clients, index) => {
+                clients[index] = $clients.text();
+            }).then(() => {
+                const sortedClients = sortArrayTextAsc(clients);
+                const isSorted = clients.every((clients, index) => clients === sortedClients[index]);
+                expect(isSorted, 'List is sorted ascending by clients').to.be.true;
+            });
+
+        });
+
+        clientsList.tableHeaderCols.contains(clientsListCard.tableHeaders[0]).click().should('have.css', 'color', colors.sortedColumn);
+        cy.wait(1000);
+
+        clientsList.clients.then(($clients) => {
+
+            const clients = [];
+
+            cy.wrap($clients).each(($clients, index) => {
+                clients[index] = $clients.text();
+            }).then(() => {
+                const sortedClients = sortArrayTextDesc(clients);
+                const isSorted = clients.every((clients, index) => clients === sortedClients[index]);
+                expect(isSorted, 'List is sorted descending by clients').to.be.true;
+            });
+
+        });
+
+    });
 
 })
 
