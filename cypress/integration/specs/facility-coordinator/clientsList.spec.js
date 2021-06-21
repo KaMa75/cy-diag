@@ -53,11 +53,15 @@ describe('Test clients list view - Facility Coordinator', () => {
             const dates = [];
 
             cy.wrap($dates).each(($date, index) => {
-                console.log($date.text().split(/\/|, |:/));
-                https://developer.mozilla.org/pl/docs/Web/JavaScript/Reference/Global_Objects/Date
-                dates[index] = $date.text();                
+                if($date.text()) {
+                    dates[index] = cy.parseDate($date.text());
+                } else {
+                    dates[index] = 0;
+                }
             }).then(() => {
-                console.log(dates)
+                const sortedDates = dates.sort((a, b) => b - a);
+                const isSorted = dates.every((date, index) => date === sortedDates[index]);
+                expect(isSorted, 'List is sorted descending by survey date').to.be.true;
             });
 
         });
