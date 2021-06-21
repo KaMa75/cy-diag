@@ -7,6 +7,7 @@ import clientsListCard from '../../../data/clientsListCard';
 import paginationOptionsList from '../../../data/pagOptionsList';
 
 import parseDate from '../../../utils/parseDate';
+import compareArrays from '../../../utils/compareArrays';
 import { sortArrayTextAsc, sortArrayTextDesc } from '../../../utils/sortArrayText';
 
 import { navigationBar } from '../../page-objects/navigationBar.po';
@@ -64,7 +65,7 @@ describe('Test clients list view - Facility Coordinator', () => {
             }).then(() => {
                 const sortedDates = [...dates];
                 sortedDates.sort((a, b) => b - a);
-                const isSorted = dates.every((date, index) => date === sortedDates[index]);
+                const isSorted = compareArrays(dates, sortedDates);
                 expect(isSorted, 'List is sorted descending by survey date').to.be.true;
             });
 
@@ -91,7 +92,7 @@ describe('Test clients list view - Facility Coordinator', () => {
             }).then(() => {
                 const sortedDates = [...dates];
                 sortedDates.sort((a, b) => a - b);
-                const isSorted = dates.every((date, index) => date === sortedDates[index]);
+                const isSorted = compareArrays(dates, sortedDates);
                 expect(isSorted, 'List is sorted ascending by survey date').to.be.true;
             });
 
@@ -113,7 +114,7 @@ describe('Test clients list view - Facility Coordinator', () => {
                 clients[index] = $clients.text();
             }).then(() => {
                 const sortedClients = sortArrayTextAsc(clients);
-                const isSorted = clients.every((clients, index) => clients === sortedClients[index]);
+                const isSorted = compareArrays(clients, sortedClients);
                 expect(isSorted, 'List is sorted ascending by clients').to.be.true;
             });
 
@@ -130,7 +131,7 @@ describe('Test clients list view - Facility Coordinator', () => {
                 clients[index] = $clients.text();
             }).then(() => {
                 const sortedClients = sortArrayTextDesc(clients);
-                const isSorted = clients.every((clients, index) => clients === sortedClients[index]);
+                const isSorted = compareArrays(clients, sortedClients);
                 expect(isSorted, 'List is sorted descending by clients').to.be.true;
             });
 
@@ -138,7 +139,7 @@ describe('Test clients list view - Facility Coordinator', () => {
 
     });
 
-    it.only('Should be sorted by the status, sorted column have green header', () => {
+    it('Should be sorted by the status, sorted column have green header', () => {
 
         logInAndGoToClients();
         clientsList.tableHeaderCols.contains(clientsListCard.tableHeaders[2]).click().should('have.css', 'color', colors.sortedColumn);
@@ -152,7 +153,7 @@ describe('Test clients list view - Facility Coordinator', () => {
                 status[index] = $status.text();
             }).then(() => {
                 const sortedStatus = sortArrayTextAsc(status);
-                const isSorted = status.every((status, index) => status === sortedStatus[index]);
+                const isSorted = compareArrays(status, sortedStatus);
                 expect(isSorted, 'List is sorted ascending by status').to.be.true;
             });
 
@@ -169,7 +170,7 @@ describe('Test clients list view - Facility Coordinator', () => {
                 status[index] = $status.text();
             }).then(() => {
                 const sortedStatus = sortArrayTextDesc(status);
-                const isSorted = status.every((status, index) => status === sortedStatus[index]);
+                const isSorted = compareArrays(status, sortedStatus);
                 expect(isSorted, 'List is sorted descending by status').to.be.true;
             });
 
