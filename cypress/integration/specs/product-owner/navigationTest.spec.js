@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-import users from '../../../data/usersData';
 import headbarHeaders from '../../../data/headbarHeaders';
 import colors from '../../../data/colors';
 
@@ -10,7 +9,7 @@ import { headBar } from '../../page-objects/headBar.po';
 describe('Test navigation buttons - Product Owner', () => {
 
     before('Log In to app', () => {
-        cy.logInToAdminApp(users.productOwner);
+        cy.logInToAdminApp(Cypress.env('users').productOwner);
     });
 
     it('Should go to correct screen, active button has correct color, headbar has correct header', () => {

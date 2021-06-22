@@ -22,6 +22,15 @@
   // `config` is the resolved Cypress config
 //}
 
+const fs = require('fs-extra');
+const path = require('path');
+
+function getConfigurationByFile(file) {
+  const pathToConfigFile = path.resolve('cypress', 'config', `${file}.json`);
+
+  return fs.readJson(pathToConfigFile);
+}
+
 // const { initPlugin } = require('cypress-plugin-snapshots/plugin');
 const { addMatchImageSnapshotPlugin } = require('cypress-image-snapshot/plugin');
 const allureWriter = require('@shelex/cypress-allure-plugin/writer');
@@ -30,5 +39,8 @@ module.exports = (on, config) => {
     // initPlugin(on, config);
     addMatchImageSnapshotPlugin(on, config);
     allureWriter(on, config);
-    return config;
+    // return config;
+
+    const file = config.env.configFile || 'dev';
+    return getConfigurationByFile(file);
 };

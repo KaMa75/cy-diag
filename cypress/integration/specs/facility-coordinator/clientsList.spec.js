@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-import users from '../../../data/usersData';
 import colors from '../../../data/colors';
 import headbarHeaders from '../../../data/headbarHeaders';
 import clientsListCard from '../../../data/clientsListCard';
@@ -15,8 +14,8 @@ import { clientsList } from '../../page-objects/clientsList.po';
 import { headBar } from '../../page-objects/headBar.po';
 import { pagination } from '../../page-objects/pagination.po';
 
-const logInAndGoToClients = (user) => {
-    cy.logInToAdminApp(users.facCoordinator);
+const logInAndGoToClients = () => {
+    cy.logInToAdminApp(Cypress.env('users').facCoordinator);
     headBar.header.then(($header) => {
         if($header.text() !== headbarHeaders.clients) {
             navigationBar.goToClients();
@@ -26,7 +25,7 @@ const logInAndGoToClients = (user) => {
 
 describe('Test clients list view - Facility Coordinator', () => {
     before('Log In to app', () => {
-        logInAndGoToClients(users.facCoordinator);
+        logInAndGoToClients();
     });
     
     beforeEach('Read localstorage', () => {
@@ -186,7 +185,7 @@ describe('Test clients list view - Facility Coordinator', () => {
 describe('Test clients list pagination - Facility Coordinator', () => {
     
     before('Log In to app', () => {
-        logInAndGoToClients(users.facCoordinator);
+        logInAndGoToClients();
     });
     
     beforeEach('Read localstorage', () => {
@@ -225,7 +224,7 @@ describe('Test clients list pagination - Facility Coordinator', () => {
     });
 
     it('Should be go to next, prev, first page', () => {
-        logInAndGoToClients(users.facCoordinator);
+        logInAndGoToClients();
 
         pagination.pagCaption.then(($caption) => {
             const { lastElement, allElements } = pagination.getPagCaptionInfo($caption);
@@ -252,7 +251,7 @@ describe('Test clients list pagination - Facility Coordinator', () => {
     });
 
     it('Should be go to last page, next/last buttons are disabled at last page', () => {
-        logInAndGoToClients(users.facCoordinator);
+        logInAndGoToClients();
 
         pagination.pagCaption.then(($caption) => {
             const { lastElement, allElements } = pagination.getPagCaptionInfo($caption);
@@ -277,7 +276,7 @@ describe('Test clients list pagination - Facility Coordinator', () => {
     });
 
     it('Should go to first page after choose other rows amount option', () => {
-        logInAndGoToClients(users.facCoordinator);
+        logInAndGoToClients();
 
         pagination.pagCaption.then(($caption) => {
             const { lastElement, allElements } = pagination.getPagCaptionInfo($caption);

@@ -30,11 +30,13 @@ import "cypress-localstorage-commands";
 addMatchImageSnapshotCommand();
 
 
-import envUrls from '../data/envsUrls';
 import { logInPage } from '../integration/page-objects/loginPage.po';
 
 Cypress.Commands.add('goToAdminAppLoginPage', () => {
-    cy.visit(envUrls.devAdmin);
+    cy.visit(Cypress.env('admin'), {
+        auth: Cypress.env('auth')
+    });
+    cy.wait(1000);
 });
 
 Cypress.Commands.add('logInToAdminApp', (user) => {

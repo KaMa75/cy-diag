@@ -112,3 +112,5 @@ allure-report/
 allure-results/
 videos/
 mochawesome-report/
+cypress/config/
+cypress/screenshots/specs/

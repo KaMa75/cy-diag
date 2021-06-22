@@ -5,12 +5,18 @@
   "main": "index.js",
   "scripts": {
     "cypress": "cypress open",
+    "cypress:staging": "cypress open --env configFile=staging",
+    "cypress:prod": "cypress open --env configFile=prod",
     "cy:mocha": "cypress run --reporter mochawesome",
     "cy:run": "cypress run --env allure=true --spec \"cypress\\integration\\specs\\*\\*\"",
+    "cy:run_stg": "cypress run --env configFile=staging allure=true --spec \"cypress\\integration\\specs\\*\\*\"",
+    "cy:run_prod": "cypress run --env configFile=prod allure=true --spec \"cypress\\integration\\specs\\*\\*\"",
     "allure:report": "allure generate allure-results --clean -o allure-report",
     "allure:clear": "if exist allure-results rmdir /q /s allure-results && if exist allure-report rmdir /q /s allure-report && if exist cypress\\screenshots rmdir /q /s cypress\\screenshots && if exist cypress\\videos rmdir /q /s cypress\\videos",
     "pretest": "npm run allure:clear",
     "test": "npm run cy:run || npm run posttest",
+    "test:staging": "npm run cy:run_stg || npm run posttest",
+    "test:prod": "npm run cy:run_prod || npm run posttest",
     "posttest": "npm run allure:report"
   },
   "author": "KM",
